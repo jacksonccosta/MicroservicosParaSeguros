@@ -23,6 +23,8 @@ O sistema é dividido em dois serviços independentes, cada um com sua própria 
 * **`PropostaService`**: Gerencia todo o ciclo de vida das propostas de seguro.
 * **`ContratacaoService`**: Efetiva a contratação de propostas aprovadas, comunicando-se com o `PropostaService` para validação.
 
+![Diagrama da Arquitetura Hexagonal dos Microsserviços](images/diagrama-arquitetura.png)
+
 ### 2. Arquitetura Hexagonal (Ports & Adapters)
 
 Este é o padrão central de cada microsserviço, garantindo que a lógica de negócio seja isolada da tecnologia.

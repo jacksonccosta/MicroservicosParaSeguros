@@ -1,0 +1,58 @@
+# Arquivo .gitignore otimizado para projetos .NET / Visual Studio
+
+# # # Ignora arquivos específicos do sistema operacional # # #
+.DS_Store
+Thumbs.db
+
+# # # Ignora diretórios e arquivos gerados pelo Visual Studio e Rider # # #
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+.idea/
+
+# # # Ignora os resultados da compilação (Build) # # #
+# As pastas bin e obj são geradas a cada compilação e não devem ir para o repositório.
+**/[Bb]in/
+**/[Oo]bj/
+
+# # # Ignora os resultados de testes # # #
+TestResults/
+*.trx
+
+# # # Ignora arquivos gerados pelo Entity Framework Core Migrations # # #
+# O arquivo de snapshot (ModelSnapshot) DEVE ser versionado, mas outros arquivos temporários não.
+# (Este .gitignore já cobre as pastas obj/bin onde eles são gerados)
+
+# # # Ignora arquivos de configuração de ambiente local # # #
+# Geralmente, o appsettings.Development.json contém connection strings locais ou
+# segredos e não é versionado. Para este desafio, pode ser útil mantê-lo
+# para facilitar a avaliação. Se fosse um projeto real, você descomentaria a linha abaixo.
+# *.appsettings.Development.json
+*.appsettings.Local.json
+
+# # # Ignora arquivos do User Secrets # # #
+# O Gerenciador de Segredos do .NET armazena segredos fora da pasta do projeto,
+# mas o arquivo de mapeamento pode aparecer.
+secrets.json
+
+# # # Ignora arquivos de cache e logs em tempo de execução # # #
+*.log
+*.tmp
+*.bak
+*.orig
+
+# # # Ignora arquivos de sobreposição do Docker Compose # # #
+# Usado para configurações locais do Docker que não devem ser compartilhadas.
+docker-compose.override.yml
+docker-compose.vs.debug.yml
+docker-compose.vs.release.yml
+
+# # # Ignora pacotes NuGet (para projetos que usam o estilo antigo packages.config) # # #
+**/packages/
+!**/packages/repositories.config
+
+# # # Ferramentas de análise de código # # #
+*.DotSettings
+*.DotSettings.user

@@ -1,0 +1,29 @@
+# Estágio 1: Build da aplicação
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copia os arquivos de projeto e a solução para restaurar as dependências
+COPY ["Seguros.Solucao.sln", "./"]
+COPY ["ContratacaoService/ContratacaoService.Api/ContratacaoService.Api.csproj", "ContratacaoService/ContratacaoService.Api/"]
+COPY ["ContratacaoService/ContratacaoService.Core/ContratacaoService.Core.csproj", "ContratacaoService/ContratacaoService.Core/"]
+COPY ["ContratacaoService/ContratacaoService.Infrastructure/ContratacaoService.Infrastructure.csproj", "ContratacaoService/ContratacaoService.Infrastructure/"]
+
+# Restaura os pacotes NuGet
+RUN dotnet restore "Seguros.Solucao.sln"
+
+# Copia todo o resto do código fonte
+COPY . .
+WORKDIR "/src/ContratacaoService/ContratacaoService.Api"
+
+# Compila e publica a aplicação em modo Release
+RUN dotnet publish "ContratacaoService.Api.csproj" -c Release -o /app/publish --no-restore
+
+# Estágio 2: Criação da imagem final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+WORKDIR /app
+
+# Copia os arquivos publicados do estágio de build
+COPY --from=build /app/publish .
+
+# Define o ponto de entrada para executar a aplicação
+ENTRYPOINT ["dotnet", "ContratacaoService.Api.dll"]
